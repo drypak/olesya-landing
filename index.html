@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>o.lesya__shine — брови и ресницы</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Forum&display=swap');
+
+    :root{
+      --bg:#0d070a;
+      --bg2:#160910;
+      --bg3:#13211c;
+      --card:rgba(255,255,255,.05);
+      --line:rgba(217,190,161,.12);
+      --text:#f7eee8;
+      --muted:rgba(247,238,232,.72);
+      --soft:rgba(247,238,232,.52);
+      --gold:#d9bea1;
+      --rose:#8b2747;
+      --rose-deep:#541528;
+      --cherry:#6d1732;
+      --green:#1d4c3d;
+      --shadow:0 22px 64px rgba(0,0,0,.26);
+      --radius-xl:34px;
+      --radius-lg:26px;
+      --radius-md:18px;
+      --container:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+
+    .wrap{
+      width:min(100%, var(--container));
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    .hero,.services,.about-main,.cta{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:84px 0 64px;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(128,24,55,.38), transparent 34%),
+        radial-gradient(circle at 102% 54%, rgba(31,88,68,.22), transparent 18%),
+        linear-gradient(115deg, #12070b 0%, #260915 18%, #431126 44%, #5e1934 74%, #17392f 100%);
+    }
+
+    .hero::before,.services::before,.about-main::before,.cta::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 28%, rgba(255,255,255,.01));
+    }
+
+    .orb,.orb-2{
+      position:absolute;
+      border-radius:999px;
+      filter:blur(70px);
+      pointer-events:none;
+      opacity:.45;
+    }
+    .orb{
+      width:260px;height:260px;
+      background:rgba(136,30,63,.36);
+      top:-40px;right:12%;
+    }
+    .orb-2{
+      width:180px;height:180px;
+      background:rgba(37,92,71,.28);
+      bottom:18px;right:4%;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:11px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(217,190,161,.14);
+      color:var(--gold);
+      font-family:'Forum',serif;
+      font-size:18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 30px rgba(0,0,0,.14);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:30px;
+      align-items:start;
+      margin-top:26px;
+    }
+
+    h1,.section-title,.service-title,.price,.main-insta-title,.insta-brand{
+      font-family:'Forum',serif;
+      font-weight:400;
+      letter-spacing:.02em;
+    }
+
+    h1{
+      margin:0 0 20px;
+      font-size:clamp(56px, 7vw, 102px);
+      line-height:.9;
+      color:#fff7f1;
+      max-width:820px;
+    }
+
+    .hero-text{
+      max-width:620px;
+      font-size:18px;
+      color:var(--muted);
+      margin:0 0 14px;
+    }
+
+    .hero-sub{
+      display:inline-block;
+      margin-bottom:26px;
+      color:var(--gold);
+      font-size:13px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .hero-points{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:28px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:11px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(217,190,161,.12);
+      color:#f0e0d0;
+      font-size:14px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+      backdrop-filter:blur(8px);
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:56px;
+      padding:0 28px;
+      border-radius:18px;
+      font-weight:600;
+      font-size:18px;
+      transition:.25s ease;
+    }
+    .btn:hover,.insta-link:hover,.main-insta-link:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      color:#fffaf7;
+      background:linear-gradient(135deg, #6a1730 0%, #8c2345 72%, #2a5846 100%);
+      box-shadow:0 18px 36px rgba(82,14,34,.28);
+    }
+
+    .btn-secondary{
+      color:#f0e5db;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(217,190,161,.14);
+    }
+
+    .card{
+      background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(217,190,161,.10);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+    }
+
+    .visual-card{
+      border-radius:var(--radius-xl);
+      padding:18px;
+    }
+
+    .visual-main{
+      border-radius:28px;
+      padding:18px;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(137,27,58,.24), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(35,95,73,.22), transparent 30%),
+        linear-gradient(160deg, #14070c 0%, #261017 56%, #13221d 100%);
+    }
+
+    .insta-link,.main-insta-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      width:fit-content;
+      padding:11px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(217,190,161,.12);
+      transition:.25s ease;
+      margin-bottom:14px;
+    }
+
+    .insta-link span,.main-insta-link span{
+      color:#fff2e8;
+      font-size:15px;
+      font-weight:600;
+      letter-spacing:.02em;
+    }
+
+    .insta-icon{
+      width:18px;height:18px;flex:0 0 18px;
+    }
+
+    .insta-preview{
+      max-width:520px;
+      margin-left:auto;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(217,190,161,.10);
+      background:rgba(255,255,255,.03);
+    }
+
+    .insta-topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 14px 12px;
+      border-bottom:1px solid rgba(217,190,161,.08);
+      background:rgba(255,255,255,.02);
+    }
+
+    .insta-user{display:flex;align-items:center;gap:10px;min-width:0}
+    .insta-avatar{
+      width:44px;height:44px;border-radius:50%;
+      background:linear-gradient(135deg,#f9d58a,#d95a7f,#7d42e2);
+      padding:2px;flex:0 0 44px;
+    }
+    .insta-avatar-inner{
+      width:100%;height:100%;border-radius:50%;
+      object-fit:cover;border:2px solid rgba(255,255,255,.82);
+      background:#000;
+    }
+
+    .insta-name{font-size:14px;font-weight:700;color:#fff5ee}
+    .insta-subname{font-size:12px;color:var(--soft);margin-top:2px}
+    .insta-dots{color:var(--gold);font-size:22px;line-height:1;padding-left:8px}
+
+    .insta-body{padding:14px}
+    .insta-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .insta-stat{
+      padding:9px 10px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(217,190,161,.08);
+      text-align:center;
+    }
+    .insta-stat strong{display:block;font-size:14px;color:#fff5ee;margin-bottom:2px}
+    .insta-stat span{color:var(--soft);font-size:11px}
+
+    .insta-bio{
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(217,190,161,.08);
+      margin-bottom:12px;
+      color:#f2e3d7;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .insta-bio a{color:var(--gold)}
+
+    .work-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:6px;
+    }
+    .work-post{
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      aspect-ratio:1 / 1.34;
+      background:#221318;
+      border:1px solid rgba(217,190,161,.08);
+    }
+    .work-post img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .work-post::after{
+      content:"пост";
+      position:absolute;
+      right:8px;
+      bottom:8px;
+      font-size:10px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      background:rgba(0,0,0,.24);
+      padding:4px 6px;
+      border-radius:999px;
+      backdrop-filter:blur(6px);
+    }
+
+    .insta-cta{
+      margin-top:12px;
+      color:var(--gold);
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .section{padding:74px 0}
+    .section-title{
+      font-size:clamp(42px,4vw,72px);
+      line-height:.95;
+      margin:0 0 14px;
+      color:#fff7f1;
+    }
+    .section-text{
+      max-width:700px;
+      color:var(--muted);
+      font-size:16px;
+      margin:0 0 30px;
+    }
+
+    .services{
+      background:
+        radial-gradient(circle at 22% 10%, rgba(111,24,45,.16), transparent 26%),
+        radial-gradient(circle at 100% 85%, rgba(31,88,68,.12), transparent 16%),
+        linear-gradient(180deg, #14090e 0%, #1b0b12 42%, #101916 100%);
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:20px;
+    }
+    .service-card{border-radius:var(--radius-lg);padding:28px}
+    .service-tag{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(217,190,161,.10);
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .service-top{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      align-items:flex-start;
+      margin-bottom:16px;
+    }
+    .service-title{
+      font-size:40px;
+      line-height:.96;
+      color:#fff6ef;
+      max-width:430px;
+    }
+    .price{
+      white-space:nowrap;
+      font-size:34px;
+      color:var(--gold);
+    }
+    .service-desc{
+      color:var(--muted);
+      font-size:15px;
+      margin-bottom:16px;
+    }
+    .service-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:9px;
+    }
+    .service-list li{
+      position:relative;
+      padding-left:18px;
+      color:#f1e7dc;
+      font-size:15px;
+    }
+    .service-list li::before{
+      content:"•";
+      position:absolute;
+      left:0;top:0;
+      color:#8c2444;
+      font-weight:900;
+    }
+    .service-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .about-main{
+      background:
+        radial-gradient(circle at 12% 12%, rgba(111,24,45,.16), transparent 22%),
+        radial-gradient(circle at 100% 76%, rgba(31,88,68,.12), transparent 18%),
+        linear-gradient(180deg, #13090e 0%, #1b0c13 46%, #101815 100%);
+    }
+
+    .about-main-grid{
+      display:grid;
+      grid-template-columns:.96fr 1.04fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .main-insta-card,.main-preview-card{
+      border-radius:28px;
+      padding:28px;
+    }
+
+    .main-note{
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .main-insta-title{
+      font-size:clamp(38px,4vw,62px);
+      line-height:.94;
+      margin:0 0 14px;
+      color:#fff7f1;
+      max-width:520px;
+    }
+
+    .main-insta-text{
+      color:var(--muted);
+      font-size:16px;
+      max-width:520px;
+      margin:0 0 18px;
+    }
+
+    .main-preview{
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(217,190,161,.10);
+      background:rgba(255,255,255,.03);
+    }
+    .main-preview-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:18px;
+      border-bottom:1px solid rgba(217,190,161,.08);
+    }
+    .main-preview-avatar{
+      width:56px;height:56px;border-radius:50%;
+      object-fit:cover;
+      border:2px solid rgba(255,255,255,.7);
+      background:#000;
+      flex:0 0 56px;
+    }
+    .main-preview-name{
+      font-size:16px;font-weight:700;color:#fff3ea
+    }
+    .main-preview-desc{
+      font-size:13px;color:var(--soft);margin-top:3px
+    }
+    .main-preview-photo{
+      aspect-ratio:16 / 10;
+      width:100%;
+      object-fit:cover;
+      background:#24161d;
+    }
+    .main-preview-bottom{
+      padding:16px 18px 18px;
+      color:#f2e5d9;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .cta{
+      padding:88px 0 94px;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(111,24,45,.18), transparent 28%),
+        radial-gradient(circle at 100% 50%, rgba(31,88,68,.16), transparent 18%),
+        linear-gradient(120deg, #12070b 0%, #2a0b16 34%, #461427 72%, #17392f 100%);
+    }
+    .cta-card{border-radius:30px;padding:36px}
+    .cta h3{
+      font-size:clamp(46px,4vw,74px);
+      margin:0 0 12px;
+      line-height:.92;
+      color:#fff7f1;
+      font-family:'Forum',serif;
+      font-weight:400;
+    }
+    .cta p{
+      margin:0 0 24px;
+      max-width:760px;
+      color:var(--muted);
+      font-size:17px;
+    }
+    .cta-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:24px;
+    }
+    .footer-note{
+      margin-top:18px;
+      color:rgba(246,239,232,.46);
+      font-size:14px;
+    }
+
+    @media (max-width:1080px){
+      .hero-grid,.services-grid,.about-main-grid{grid-template-columns:1fr}
+      .insta-preview{max-width:none}
+    }
+
+    @media (max-width:980px){
+      h1{font-size:clamp(44px,11vw,82px)}
+      .service-title,.section-title,.main-insta-title,.cta h3{
+        font-size:clamp(34px,8vw,58px)
+      }
+      .price{font-size:30px}
+    }
+
+    @media (max-width:640px){
+      .hero{padding:46px 0 38px}
+      .section,.cta{padding:48px 0}
+      .wrap{padding:0 16px}
+      .btn{width:100%;min-height:52px;font-size:16px}
+      .actions{flex-direction:column}
+      .badge{font-size:14px;padding:10px 14px}
+      .hero-text,.section-text,.service-desc,.main-insta-text,.cta p,.footer-note{
+        font-size:14px
+      }
+      .hero-sub{font-size:11px;margin-bottom:20px}
+      .hero-points{gap:10px;margin-bottom:22px}
+      .chip{font-size:12px;padding:9px 11px}
+      .cta-card,.service-card,.visual-card,.main-insta-card,.main-preview-card{padding:18px}
+      .visual-main{padding:14px;border-radius:22px}
+      .service-top{flex-direction:column;align-items:flex-start}
+      .price{font-size:24px}
+      .insta-topbar,.insta-body,.main-preview-top,.main-preview-bottom{padding-left:14px;padding-right:14px}
+      .insta-avatar{width:40px;height:40px;flex-basis:40px}
+      .main-preview-avatar{width:48px;height:48px;flex-basis:48px}
+      .insta-preview,.main-preview{border-radius:20px}
+      .work-grid{gap:5px}
+      .work-post{border-radius:10px}
+      .orb,.orb-2{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="orb"></div>
+  <div class="orb-2"></div>
+  <div class="wrap">
+    <div class="badge">Brow & Lash Studio</div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>Брови и<br>ресницы<br>с чистой<br>эстетикой</h1>
+        <p class="hero-text">Чистая форма, аккуратный результат и выразительный взгляд без лишнего.</p>
+        <div class="hero-sub">Аккуратно • Выразительно • Деликатно</div>
+
+        <div class="hero-points">
+          <span class="chip">Аккуратная форма</span>
+          <span class="chip">Эстетичный результат</span>
+          <span class="chip">Деликатная работа</span>
+          <span class="chip">Запись по времени</span>
+        </div>
+
+        <div class="actions">
+          <a href="#prices" class="btn btn-primary">Услуги и цены</a>
+          <a href="https://www.instagram.com/o.lesya__shine/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Написать в Instagram</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="visual-card card">
+          <div class="visual-main">
+            <a class="insta-link" href="https://www.instagram.com/o.lesya__shine/" target="_blank" rel="noopener noreferrer" aria-label="Instagram o.lesya__shine">
+              <svg class="insta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/>
+              </svg>
+              <span>o.lesya__shine</span>
+            </a>
+
+            <div class="insta-preview">
+              <div class="insta-topbar">
+                <div class="insta-user">
+                  <div class="insta-avatar">
+                    <img class="insta-avatar-inner" src="images/avatar-work.jpg" alt="Аватар рабочего Instagram">
+                  </div>
+                  <div>
+                    <div class="insta-name">o.lesya__shine</div>
+                    <div class="insta-subname">Ламинирование ресниц и бровей</div>
+                  </div>
+                </div>
+                <div class="insta-dots">•••</div>
+              </div>
+
+              <div class="insta-body">
+                <div class="insta-stats">
+                  <div class="insta-stat"><strong>7</strong><span>публикации</span></div>
+                  <div class="insta-stat"><strong>93</strong><span>подписчики</span></div>
+                  <div class="insta-stat"><strong>1</strong><span>подписки</span></div>
+                </div>
+
+                <div class="insta-bio">
+                  🌸 Делаю ламинирование ресниц<br>
+                  🌸 А также ламинирование, окрашивание и коррекцию бровей.<br>
+                  Основа: <a href="https://www.instagram.com/_o.lesyaa/" target="_blank" rel="noopener noreferrer">@_o.lesyaa</a>
+                </div>
+
+                <div class="work-grid" aria-label="Превью работ">
+                  <div class="work-post"><img src="images/work-1.jpg" alt="Работа 1"></div>
+                  <div class="work-post"><img src="images/work-2.jpg" alt="Работа 2"></div>
+                  <div class="work-post"><img src="images/work-3.jpg" alt="Работа 3"></div>
+                </div>
+
+                <div class="insta-cta">
+                  Смотреть работы в Instagram →
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<section class="services section" id="prices">
+  <div class="wrap">
+    <h2 class="section-title">Услуги</h2>
+    <p class="section-text">Основные процедуры в аккуратной и чистой подаче.</p>
+
+    <div class="services-grid">
+      <div class="service-card card">
+        <div class="service-tag">Brows</div>
+        <div class="service-top">
+          <div class="service-title">Ламинирование бровей</div>
+          <div class="price">2000 ₽</div>
+        </div>
+        <div class="service-desc">Для аккуратной укладки, дисциплины волосков и выразительной формы.</div>
+        <ul class="service-list">
+          <li>Фиксация и направление волосков</li>
+          <li>Чистый, собранный вид</li>
+          <li>Мягкий эстетичный результат</li>
+        </ul>
+        <div class="service-meta">
+          <span class="chip">Аккуратная укладка</span>
+          <span class="chip">Чистая форма</span>
+        </div>
+      </div>
+
+      <div class="service-card card">
+        <div class="service-tag">Brows</div>
+        <div class="service-top">
+          <div class="service-title">Коррекция + окрашивание бровей</div>
+          <div class="price">1000 ₽</div>
+        </div>
+        <div class="service-desc">Форма и оттенок, которые мягко подчеркивают лицо.</div>
+        <ul class="service-list">
+          <li>Подбор оттенка</li>
+          <li>Коррекция формы</li>
+          <li>Естественный выразительный эффект</li>
+        </ul>
+        <div class="service-meta">
+          <span class="chip">Архитектура бровей</span>
+          <span class="chip">Мягкий оттенок</span>
+        </div>
+      </div>
+
+      <div class="service-card card">
+        <div class="service-tag">Lashes</div>
+        <div class="service-top">
+          <div class="service-title">Ламинирование ресниц с окрашиванием</div>
+          <div class="price">1500 ₽</div>
+        </div>
+        <div class="service-desc">Изгиб, глубина цвета и более открытый взгляд.</div>
+        <ul class="service-list">
+          <li>Красивый изгиб</li>
+          <li>Окрашивание ресниц</li>
+          <li>Аккуратный стойкий результат</li>
+        </ul>
+        <div class="service-meta">
+          <span class="chip">Открытый взгляд</span>
+          <span class="chip">Без лишнего</span>
+        </div>
+      </div>
+
+      <div class="service-card card">
+        <div class="service-tag">Lashes</div>
+        <div class="service-top">
+          <div class="service-title">Снятие ресниц</div>
+          <div class="price">300 ₽</div>
+        </div>
+        <div class="service-desc">Бережное снятие без спешки и лишнего дискомфорта.</div>
+        <ul class="service-list">
+          <li>Деликатная работа</li>
+          <li>Чистое снятие</li>
+          <li>Можно как отдельную процедуру</li>
+        </ul>
+        <div class="service-meta">
+          <span class="chip">Бережный подход</span>
+          <span class="chip">Комфортно</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-main section">
+  <div class="wrap">
+    <div class="about-main-grid">
+      <div class="main-insta-card card">
+        <div class="main-note">Основная страница</div>
+        <h2 class="main-insta-title">Это я. Здесь можно посмотреть, как я живу, чем вдохновляюсь и что мне близко.</h2>
+        <p class="main-insta-text">Не только процедуры и работа, но и обычная жизнь, настроение, кадры вне beauty-страницы и то, что остаётся за кадром рабочего профиля.</p>
+
+        <a class="main-insta-link" href="https://www.instagram.com/_o.lesyaa?igsh=MTg0bXdkanBlajYzeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram _o.lesyaa">
+          <svg class="insta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/>
+          </svg>
+          <span>@_o.lesyaa</span>
+        </a>
+      </div>
+
+      <div class="main-preview-card card">
+        <div class="main-preview">
+          <div class="main-preview-top">
+            <img class="main-preview-avatar" src="images/avatar-main.jpg" alt="Аватар основной страницы">
+            <div>
+              <div class="main-preview-name">_o.lesyaa</div>
+              <div class="main-preview-desc">основная страница</div>
+            </div>
+          </div>
+          <img class="main-preview-photo" src="images/main-post.jpg" alt="Пост основной страницы">
+          <div class="main-preview-bottom">
+            Личная страница с повседневными кадрами, атмосферой, настроением и тем, как выглядит жизнь вне рабочего аккаунта.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-card card">
+      <h3>Запись</h3>
+      <p>Напишите в удобный мессенджер или в Instagram, чтобы выбрать процедуру и время.</p>
+
+      <div class="cta-meta">
+        <span class="chip">Индивидуальная запись</span>
+        <span class="chip">Чистая эстетика</span>
+        <span class="chip">Аккуратный результат</span>
+      </div>
+
+      <div class="actions">
+        <a href="https://www.instagram.com/o.lesya__shine/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Instagram</a>
+        <a href="#" class="btn btn-secondary">WhatsApp</a>
+      </div>
+
+      <div class="footer-note">Папка проекта: images/avatar-work.jpg, images/work-1.jpg, images/work-2.jpg, images/work-3.jpg, images/avatar-main.jpg, images/main-post.jpg</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
