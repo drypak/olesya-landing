@@ -543,7 +543,97 @@
       color:rgba(246,239,232,.46);
       font-size:14px;
     }
+        .booking-form{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:26px;
+    }
 
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field-full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:13px;
+      color:var(--gold);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      border-radius:16px;
+      padding:16px 16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(217,190,161,.12);
+      color:var(--text);
+      font:inherit;
+      resize:vertical;
+      min-height:56px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+      backdrop-filter:blur(8px);
+    }
+
+    .field textarea{
+      min-height:120px;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color:rgba(247,238,232,.42);
+    }
+
+    .field select option{
+      color:#111;
+    }
+
+    .form-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      margin-top:8px;
+    }
+
+    .form-note{
+      color:var(--soft);
+      font-size:13px;
+    }
+
+    .form-status{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      font-size:14px;
+      display:none;
+      border:1px solid rgba(217,190,161,.12);
+      background:rgba(255,255,255,.04);
+    }
+
+    .form-status.is-success{
+      display:block;
+      color:#f3eadf;
+      border-color:rgba(71, 166, 117, .35);
+      background:rgba(71, 166, 117, .10);
+    }
+
+    .form-status.is-error{
+      display:block;
+      color:#ffe6e6;
+      border-color:rgba(196, 76, 76, .35);
+      background:rgba(196, 76, 76, .10);
+    }
     @media (max-width:1080px){
       .hero-grid,.services-grid,.about-main-grid{grid-template-columns:1fr}
       .insta-preview{max-width:none}
@@ -696,7 +786,7 @@
         <div class="service-tag">Brows</div>
         <div class="service-top">
           <div class="service-title">Коррекция + окрашивание бровей</div>
-          <div class="price">1000 ₽</div>
+          <div class="price">1500 ₽</div>
         </div>
         <div class="service-desc">Форма и оттенок, которые мягко подчеркивают лицо.</div>
         <ul class="service-list">
@@ -789,23 +879,111 @@
 <section class="cta">
   <div class="wrap">
     <div class="cta-card card">
-      <h3>Запись</h3>
-      <p>Напишите в удобный мессенджер или в Instagram, чтобы выбрать процедуру и время.</p>
+  <h3>Запись</h3>
+  <p>Оставьте заявку прямо на сайте — я свяжусь с вами и помогу выбрать процедуру и удобное время.</p>
 
-      <div class="cta-meta">
-        <span class="chip">Индивидуальная запись</span>
-        <span class="chip">Чистая эстетика</span>
-        <span class="chip">Аккуратный результат</span>
-      </div>
+  <div class="cta-meta">
+    <span class="chip">Индивидуальная запись</span>
+    <span class="chip">Чистая эстетика</span>
+    <span class="chip">Аккуратный результат</span>
+  </div>
 
-      <div class="actions">
-        <a href="https://wa.me/79999999999" target="_blank" class="btn btn-secondary">WhatsApp</a>
-        <a href="https://t.me/username" target="_blank" class="btn btn-secondary">Telegram</a>
-      </div>
-
+  <form class="booking-form" id="bookingForm">
+    <div class="field">
+      <label for="name">Имя</label>
+      <input id="name" name="name" type="text" placeholder="Ваше имя" required />
     </div>
+
+    <div class="field">
+      <label for="contact">Контакт</label>
+      <input id="contact" name="contact" type="text" placeholder="Телефон, Telegram или Instagram" required />
+    </div>
+
+    <div class="field field-full">
+      <label for="service">Услуга</label>
+      <select id="service" name="service" required>
+        <option value="">Выберите услугу</option>
+        <option>Ламинирование бровей</option>
+        <option>Коррекция + окрашивание бровей</option>
+        <option>Ламинирование ресниц с окрашиванием</option>
+        <option>Снятие ресниц</option>
+      </select>
+    </div>
+
+    <div class="field field-full">
+      <label for="comment">Комментарий</label>
+      <textarea id="comment" name="comment" placeholder="Удобное время, пожелания или вопрос"></textarea>
+    </div>
+
+    <div class="field field-full">
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="submitBtn">Отправить заявку</button>
+        <a href="https://wa.me/79999999999" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WhatsApp</a>
+        <a href="https://t.me/username" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Telegram</a>
+      </div>
+      <div class="form-note">Заявка отправляется в API и сохраняется в базе.</div>
+      <div class="form-status" id="formStatus"></div>
+    </div>
+  </form>
+</div>
   </div>
 </section>
+<script>
+  const API_BASE = "http://127.0.0.1:8000";
 
+  const bookingForm = document.getElementById("bookingForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const formStatus = document.getElementById("formStatus");
+
+  function setStatus(message, type) {
+    formStatus.textContent = message;
+    formStatus.className = "form-status";
+    if (type === "success") formStatus.classList.add("is-success");
+    if (type === "error") formStatus.classList.add("is-error");
+  }
+
+  bookingForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(bookingForm);
+    const payload = {
+      name: formData.get("name")?.toString().trim(),
+      contact: formData.get("contact")?.toString().trim(),
+      service: formData.get("service")?.toString().trim(),
+      comment: formData.get("comment")?.toString().trim() || null,
+    };
+
+    if (!payload.name || !payload.contact || !payload.service) {
+      setStatus("Заполните имя, контакт и услугу.", "error");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Отправляем...";
+
+    try {
+      const response = await fetch(`${API_BASE}/api/leads`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || "Не удалось отправить заявку.");
+      }
+
+      bookingForm.reset();
+      setStatus("Заявка отправлена. Скоро с вами свяжутся.", "success");
+    } catch (error) {
+      setStatus(error.message || "Ошибка соединения с API.", "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Отправить заявку";
+    }
+  });
+</script>
 </body>
 </html>
